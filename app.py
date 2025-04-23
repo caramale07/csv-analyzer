@@ -88,7 +88,8 @@ if uploaded_file is not None:
             'valign': 'vcenter',
             'bg_color': '#0B5394',
             'font_color': 'white',
-            'border': 1
+            'border': 1,
+            'text_wrap': True
         })
         
         cell_format = workbook.add_format({
@@ -96,7 +97,8 @@ if uploaded_file is not None:
             'font_size': 10,
             'align': 'center',
             'valign': 'vcenter',
-            'border': 1
+            'border': 1,
+            'text_wrap': True
         })
         
         left_align_format = workbook.add_format({
@@ -104,7 +106,8 @@ if uploaded_file is not None:
             'font_size': 10,
             'align': 'left',
             'valign': 'vcenter',
-            'border': 1
+            'border': 1,
+            'text_wrap': True
         })
         
         headers = ["No.", "Column", "Total percentage", "Positive Share", 
@@ -134,9 +137,17 @@ if uploaded_file is not None:
         return output
     
     excel_file = to_excel()
+    
+    uploaded_filename = uploaded_file.name
+    file_parts = uploaded_filename.split('.')
+    name_parts = file_parts[0].split('_')
+    last_word = name_parts[-1] if len(name_parts) > 0 else file_parts[0]
+    
+    download_filename = f"{last_word}-database-assessment.xlsx"
+    
     st.download_button(
         label="Download Excel Report",
         data=excel_file,
-        file_name="database_assessment.xlsx",
+        file_name=download_filename,
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
