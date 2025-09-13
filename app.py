@@ -143,7 +143,7 @@ if uploaded_file is not None:
     name_parts = file_parts[0].split('_')
     last_word = name_parts[-1] if len(name_parts) > 0 else file_parts[0]
     
-    download_filename = f"{last_word}-database-assessment.xlsx"
+    download_filename = f"{last_word}-db-assessment.xlsx"
     
     st.download_button(
         label="Download Excel Report",
